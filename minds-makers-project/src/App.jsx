@@ -16,8 +16,8 @@ import { createClient } from "@supabase/supabase-js";
       Leave it ON if you want real email verification.
    ============================================================ */
 
-const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL"; // e.g. https://xxxxxxxx.supabase.co
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_PUBLIC_KEY";
+const SUPABASE_URL = "https://ltzkgbjfbtavmqucoeip.supabase.co/rest/v1/"; // e.g. https://xxxxxxxx.supabase.co
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx0emtnYmpmYnRhdm1xdWNvZWlwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNzMzNjMsImV4cCI6MjEwMDc0OTM2M30.7DJr58QRJ6SSPCl2OVpZ8RQaPWoCpGtPeRacEAIZ0sQ";
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 

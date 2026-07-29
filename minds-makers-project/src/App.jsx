@@ -945,16 +945,17 @@ function AdminView({ currentUser, users, tasks, activity, companyName, siteConte
                     <td><div className="row-flex"><div className="avatar mini-avatar" style={{ background: m.color }}>{initials(m.name)}</div>{m.name}</div></td>
                     <td className="mm-mono" style={{ color: "var(--muted)" }}>{m.email}</td>
                     <td>
-                      {isOwner && m.role !== "owner" ? (
+                      {isOwner ? (
                         <select className="inline-select" value={m.role} onChange={(e) => changeRole(m.id, e.target.value)}>
                           <option value="member">Member</option>
                           <option value="admin">Admin</option>
+                          <option value="owner">Owner</option>
                         </select>
                       ) : <RoleLabel role={m.role} />}
                     </td>
                     <td>{m.active ? <span className="pill pill-active">Active</span> : <span className="pill pill-inactive">Inactive</span>}</td>
                     <td className="mm-mono" style={{ color: "var(--muted-2)", fontSize: 11.5 }}>{new Date(m.createdAt).toLocaleDateString()}</td>
-                    <td>{m.role !== "owner" && <button className="btn btn-ghost btn-sm" onClick={() => toggleActive(m.id)}>{m.active ? "Deactivate" : "Activate"}</button>}</td>
+                    <td>{isAdminLike(currentUser) && <button className="btn btn-ghost btn-sm" onClick={() => toggleActive(m.id)}>{m.active ? "Deactivate" : "Activate"}</button>}</td>
                   </tr>
                 ))}
               </tbody>
@@ -1019,7 +1020,7 @@ function SiteSettingsPanel({ companyName, currentUser, onSave }) {
       <div className="panel-head"><h3>Workspace settings</h3></div>
       <div className="field"><label>Company name</label><input type="text" value={val} onChange={(e) => setVal(e.target.value)} /></div>
       <button className="btn btn-primary" onClick={() => onSave(val)}>Save changes</button>
-      <p className="auth-note" style={{ marginTop: 18 }}>Signed in as <b>{currentUser.email}</b> — Owner accounts cannot be demoted or deactivated, and only the Owner can reach Site Settings and Site Content.</p>
+      <p className="auth-note" style={{ marginTop: 18 }}>Signed in as <b>{currentUser.email}</b> — only the Owner can change anyone's role or reach Site Settings and Site Content. The system will never let the last remaining Owner be demoted or deactivated.</p>
     </div>
   );
 }
